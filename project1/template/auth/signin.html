@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>SIGN IN PAGE</title>
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    {% if messages %}
+    {% for msg in messages %}
+    <p><span style="color:blue;">{{msg}}</span></p>
+    {% endfor %}
+    {% endif %}
+    <form method="post">
+
+        {% csrf_token %}
+        <input type="text" placeholder="USERNAME" name="un" class="form-control" >
+        <br>
+        <br>
+        <input type="password" placeholder="PASSWORD" name="pw" class="form-control">
+        <br>
+        <br>
+        <input type="submit" value="LOGIN" class="btn btn-success"  >
+    </form>
+</div>
+{% endblock %}

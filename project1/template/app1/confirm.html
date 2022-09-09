@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>DELETE PAGE</title>
+{% endblock %}
+
+
+{% block content %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <p>Do you reall want to delete <span>
+            {{dlt.oid}}
+        </span>this data</p>
+        <br>
+        <input type="submit" value="DELETE" class="btn btn-danger">
+    </form>
+    <button class="btn btn-success"><a href="{% url 'show_url' %}">GO BACK</a></button>
+</div>
+{% endblock %}
