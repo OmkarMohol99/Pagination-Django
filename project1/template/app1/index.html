@@ -1,37 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Django Paginator example</title>
-</head>
-<body>
-	<div class="container">
-		{% for post in page_obj.object_list %}
-		{# note that the list of posts are in the page_obj.object_list not page_obj #}
-			<h1>{{post.oid}}</h1>
-			<h1>{{post.name}}</h1>
-			<h1>{{post.address}}</h1>
-			<h1>{{post.mail}}</h1>
-			<h1>{{post.product}}</h1>
+{% extends 'base.html' %}
 
+{% block title %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Django Paginator example</title>
+{% endblock %}
 
+{% block content %}
+<div class="container">
+	<table class="table table-dark">
+		<thead>
+			<tr>
+				<th>OID</th>
+				<th>NAME</th>
+				<th>ADDRESS</th>
+				<th>MAIL</th>
+				<th>PRODUCT</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in page_obj.object_list %}
+			{# note that the list of posts are in the page_obj.object_list not page_obj #}
+			<tr>
+				<td>{{post.oid}}</td>
+				<td>{{post.name}}</td>
+				<td>{{post.address}}</td>
+				<td>{{post.mail}}</td>
+				<td>{{post.product}}</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+<center>
+	{%if page_obj.has_previous %} {# whether the previous page exists #}
+	<a href="?page={{page_obj.previous_page_number}}">Back</a> {# link to the prev page #}
+	{% endif %}
+	<span>{{page_obj.number}}</span> {# the current page number #}
 
-
-			<hr/>
-		{% endfor %}
-	</div>
-	<center>
-		{%if page_obj.has_previous %} {# whether the previous page exists #}
-			<a href="?page={{page_obj.previous_page_number}}"><</a> {# link to the prev page #}
-		{% endif %}
-		<span>{{page_obj.number}}</span> {# the current page number #}
-
-		{%if page_obj.has_next %} {# whether the next page exists #}
-			<a href="?page={{page_obj.next_page_number}}">></a> {# link to the next page #}
-		{% endif %}
-	</center>
-
-<button class="btn btn-success"><a href="{% url 'show_url' %}" style="color:black;">Show All Data</a></button>
-</body>
-</html>
+	{%if page_obj.has_next %} {# whether the next page exists #}
+	<a href="?page={{page_obj.next_page_number}}">Next</a> {# link to the next page #}
+	{% endif %}
+</center>
+<center>
+	<button class="btn btn-success"><a href="{% url 'show_url' %}" style="color:white;">Show All Data</a></button>
+	{% endblock %}
+</center>

@@ -51,6 +51,7 @@ def deleteOrder(request, pk):
     return render(request, template_name, context)
 
 
+@login_required(login_url='signin_url')
 def index(request):
     template_name = 'app1/index.html'
     orders = Order.objects.all()  # fetching all post objects from database
